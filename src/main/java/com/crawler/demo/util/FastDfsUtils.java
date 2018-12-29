@@ -15,12 +15,12 @@ import java.io.IOException;
  **/
 public class FastDfsUtils {
 
-    public  static String conf_filename = "src/main/resources/fds_client.conf";
+    public static String conf_filename = "src/main/resources/fds_client.conf";
     private static TrackerServer trackerServer = null;
     private static StorageServer storageServer = null;
     private static StorageClient storageClient = null;
 
-    public static String upload(String localFileName) {
+    public static String upload(String localFileName) throws IOException {
         try {
             ClientGlobal.init(conf_filename);
             TrackerClient tracker = new TrackerClient();
@@ -31,6 +31,10 @@ public class FastDfsUtils {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("上传失败");
+        } finally {
+            if (trackerServer != null) {
+                trackerServer.close();
+            }
         }
         return null;
     }
