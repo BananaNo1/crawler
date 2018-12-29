@@ -26,7 +26,7 @@ public class URLFecter {
     public static List<JdModel> URLParser(CloseableHttpClient client, String url) throws IOException {
         List<JdModel> list = Lists.newArrayList();
 
-        //  HttpResponse response = HttpUtils.getRowHtml(client, url);
+        // HttpResponse response = HttpUtils.getRowHtml(client, url);
         HttpGet httpGet = new HttpGet(url);
         CloseableHttpResponse response = client.execute(httpGet);
         int StatusCode = response.getStatusLine().getStatusCode();
