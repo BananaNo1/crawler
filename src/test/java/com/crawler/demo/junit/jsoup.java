@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -65,29 +66,12 @@ public class jsoup {
     public void jd2() throws IOException {
         String url1 = "http://search.jd.com/Search?keyword=Python&enc=utf-8&book=y&wq=Python&pvid=33xo9lni.p4a1qb";
         String url = "https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&psort=3&page=3";//第二页商品
-        //网址分析
-        /*keyword:关键词（京东搜索框输入的信息）
-         * enc：编码方式（可改动:默认UTF-8）
-         * psort=3 //搜索方式  默认按综合查询 不给psort值
-         * page=分业（不考虑动态加载时按照基数分业，每一页30条，这里就不演示动态加载）
-         * 注意：受京东商品个性化影响，准确率无法保障
-         * */
-        //   Document doc = Jsoup.connect(url1).maxBodySize(0).get();
+
         Document doc = Jsoup.connect(url1).get();
         Elements img = doc.getElementsByTag("img");
         //doc获取整个页面的所有数据
         Elements ulList = doc.select("ul[class='gl-warp clearfix']").select("li[class=gl-item]");
 
-       /* for (Element item : ulList) {
-            //排除广告位置
-            //if (!item.select("span[class='p-promo-flag']").text().trim().equals("广告")) {
-            //如果向存到数据库和文件里请自行更改
-            // System.out.println(item.select("div[class='p-name p-name-type-2']").select("em").text());//打印商品标题到控制台
-            // }
-            //   System.out.println(liList.select("div[class=p-name]").select("em").text());
-            //System.out.println(item.select("a").text());
-            System.out.println(item.select("div[class=p-img]").select("a").text());
-        }*/
         for (Element element : img) {
             String src = element.attr("source-data-lazy-img");
             if (StringUtils.isEmpty(src)) {
@@ -101,9 +85,8 @@ public class jsoup {
     }
     // http://img14.360buyimg.com/n1/s200x200_jfs/t17953/201/1450663539/451183/3262b8de/5acb3627N8191c867.jpg
 
-    private void download(String filePath, String imageUrl) {
+    public void download(String filePath, String imageUrl) {
         String fileName = imageUrl.substring(imageUrl.lastIndexOf("/"));
-
         File files = new File(filePath);
         if (!files.exists()) {
             files.mkdirs();
@@ -139,12 +122,16 @@ public class jsoup {
             String bookPrice = element.select("div[class=p-price]").select("strong").select("i").text();
             String bookName = element.select("div[class=p-name]").select("em").text();
             src = "http:" + src;
-            download("E:/image", src);
+           // download("E:/image", src);
             String upload = FastDfsUtils.upload("E:/image/bb9b79a2e13592f0.jpg");
             jdModel.setBookID(id).setBookPrice(bookPrice).setBookName(bookName).setImgUrl(upload);
             System.out.println(jdModel);
         }
-
-
     }
+
+    @Test
+    public void test(){
+        BigDecimal decimal   = new BigDecimal(57.90+"");
+    }
+
 }

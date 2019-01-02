@@ -1,12 +1,13 @@
 spring:
   profiles:
-    active:
-    #local
-  jackson:
-    date-format: yyyy-MM-dd HH-mm:ss
-    time-zone: GMT+8
+    active: local
   http:
     encoding:
       charset: UTF-8
       force: true
       enabled: true
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.crawler.demo.entity.Book
