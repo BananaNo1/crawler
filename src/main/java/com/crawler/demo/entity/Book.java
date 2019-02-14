@@ -24,10 +24,9 @@ public class Book {
     @Field(type = FieldType.Long)
     private Long bookId;
 
-    @Field(searchAnalyzer = "ik_smart", analyzer = "ik_smart", type = FieldType.Text)
+    @Field(searchAnalyzer = "ik_smart", analyzer = "ik_smart")
     private String bookName;
 
-    @Field(type = FieldType.Double)
     private BigDecimal bookPrice;
     
     private String bookImgUrl;

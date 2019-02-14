@@ -2,7 +2,7 @@
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource #Druid连接池
-    url: jdbc:mysql://localhost:3306/crawler?useCharactorEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://120.78.3.7:3306/graproject?useCharactorEncoding=utf-8&useSSL=false&serverTimezone=UTC
     username: root #数据库用户名
     password: 123456 #数据库密码
 #    url: jdbc:mysql://127.0.0.1:3306/cspt?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=true&autoReconnect=true&failOverReadOnly=false
